@@ -1,0 +1,14 @@
+name: CI
+on: [push, pull_request]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+      - run: cargo clippy -- -D warnings
+      - run: cargo test --lib -- daemon::signal::tests daemon::log_db::tests daemon::telemetry::tests protocol::tests
+      - run: cargo test --test integration
+      - run: cargo test --test tui_snapshot
+      - run: cargo build --release
