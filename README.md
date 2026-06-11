@@ -41,7 +41,7 @@ mso                # open the interactive dashboard
 
 ### Pre-built binary
 ```bash
-curl -fsSL https://github.com/anomalyco/mso/releases/latest/download/mso-x86_64-unknown-linux-gnu -o /usr/local/bin/mso && chmod +x /usr/local/bin/mso
+curl -fsSL https://github.com/Abdallah4Z/mso/releases/latest/download/mso-x86_64-unknown-linux-gnu -o /usr/local/bin/mso && chmod +x /usr/local/bin/mso
 ```
 
 ### From source (Rust 1.80+)
@@ -51,7 +51,7 @@ cargo install mso
 
 ### From source (bleeding edge)
 ```bash
-git clone https://github.com/anomalyco/mso.git
+git clone https://github.com/Abdallah4Z/mso.git
 cd mso
 cargo install --path .
 ```
