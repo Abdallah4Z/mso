@@ -1,0 +1,42 @@
+name: Release
+on:
+  push:
+    tags: ["v*"]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        arch:
+          - target: x86_64-unknown-linux-gnu
+            runner: ubuntu-latest
+          - target: aarch64-unknown-linux-gnu
+            runner: ubuntu-24-core-arm64
+    runs-on: ${{ matrix.arch.runner }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+      - run: cargo build --release
+      - run: cp target/release/mso mso-${{ matrix.arch.target }}
+      - run: tar czf mso-${{ matrix.arch.target }}.tar.gz mso-${{ matrix.arch.target }}
+
+      - name: Package .deb
+        run: |
+          mkdir -p pkg/deb/usr/local/bin
+          cp mso-${{ matrix.arch.target }} pkg/deb/usr/local/bin/mso
+          mkdir -p pkg/deb/DEBIAN
+          cat > pkg/deb/DEBIAN/control << EOF
+          Package: mso
+          Version: ${GITHUB_REF_NAME#v}
+          Architecture: $( [ "${{ matrix.arch.target }}" = "x86_64-unknown-linux-gnu" ] && echo "amd64" || echo "arm64" )
+          Maintainer: MSO Contributors
+          Description: Multi-Stream Orchestrator — CLI process wrapper, daemon, and TUI dashboard
+          EOF
+          dpkg-deb --build pkg/deb mso-${{ matrix.arch.target }}.deb
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            mso-${{ matrix.arch.target }}
+            mso-${{ matrix.arch.target }}.tar.gz
+            mso-${{ matrix.arch.target }}.deb
