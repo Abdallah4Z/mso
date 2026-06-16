@@ -2,6 +2,7 @@
 set -eu
 
 REPO="Abdallah4Z/mso"
+BRANCH="master"
 ARCH=$(uname -m)
 
 case "$ARCH" in

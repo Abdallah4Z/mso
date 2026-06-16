@@ -6,7 +6,7 @@ Manage background processes from your terminal. Spawn, monitor, and control
 long-running commands with a real-time dashboard.
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Abdallah4Z/mso/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/Abdallah4Z/mso/master/install.sh | bash
 ```
 
 ## Quick start
@@ -53,7 +53,7 @@ See [docs/commands.md](docs/commands.md) for the full reference.
 
 ```bash
 # One command (any Linux)
-curl -fsSL https://raw.githubusercontent.com/Abdallah4Z/mso/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/Abdallah4Z/mso/master/install.sh | bash
 
 # From source
 cargo install mso
