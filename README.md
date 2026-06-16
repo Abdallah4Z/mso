@@ -39,9 +39,21 @@ mso                # open the interactive dashboard
 
 ## Installation
 
-### Pre-built binary
+### One command (any Linux)
 ```bash
-curl -fsSL https://github.com/Abdallah4Z/mso/releases/latest/download/mso-x86_64-unknown-linux-gnu -o /usr/local/bin/mso && chmod +x /usr/local/bin/mso
+curl -fsSL https://raw.githubusercontent.com/Abdallah4Z/mso/main/install.sh | bash
+```
+
+### Package manager
+```bash
+# Arch Linux
+yay -S mso
+
+# Debian / Ubuntu (after downloading the .deb from a release)
+sudo dpkg -i mso_amd64.deb
+
+# Fedora / RHEL (after downloading the .rpm from a release)
+sudo rpm -i mso_x86_64.rpm
 ```
 
 ### From source (Rust 1.80+)
@@ -53,7 +65,7 @@ cargo install mso
 ```bash
 git clone https://github.com/Abdallah4Z/mso.git
 cd mso
-cargo install --path .
+make install
 ```
 
 Requires Rust 1.80+ and Linux (uses `/proc` for process telemetry).
